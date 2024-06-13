@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    id("com.adarshr.test-logger") version "4.0.0"
+
 }
 
 group = "programming"

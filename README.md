@@ -14,3 +14,9 @@ https://docs.gradle.org/current/userguide/implementing_custom_tasks.html
 # baeldung.com
 https://www.baeldung.com/gradle-custom-task
 https://github.com/eugenp/tutorials/blob/master/gradle-modules/gradle/build.gradle
+
+
+# gradle-test-logger-plugin
+https://github.com/radarsh/gradle-test-logger-plugin
+https://github.com/radarsh/gradle-test-logger-plugin/issues/137
+https://github.com/hmmrjn/spring-boot-todolist/commit/6a6c2fafc81549c94332eaec790c4676fa926f1f

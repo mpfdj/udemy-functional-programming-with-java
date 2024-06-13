@@ -1,9 +1,23 @@
+import com.adarshr.gradle.testlogger.theme.ThemeType
+
+
 plugins {
     id("java")
+    id("com.adarshr.test-logger") version "4.0.0"
+    id("application")
 }
 
 group = "programming"
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass = "programming.FP01Functional"
+}
+
+tasks.jar {
+    manifest.attributes["Main-Class"] = application.mainClass
+}
+
 
 repositories {
     mavenCentral()
@@ -16,40 +30,31 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    reports.junitXml.required = false
+    reports.html.required = false
+//    testLogging.showStandardStreams = true
+}
+
+testlogger {
+    theme = ThemeType.STANDARD
+    showExceptions = false
+    showStackTraces = false
+    showFullStackTraces = false
+    showCauses = false
+    slowThreshold = 2000
+    showSummary = false
+    showSimpleNames = false
+    showPassed = true
+    showSkipped = true
+    showFailed = true
+    showOnlySlow = false
+    showStandardStreams = false
+    showPassedStandardStreams = false
+    showSkippedStandardStreams = false
+    showFailedStandardStreams = false
+    logLevel = LogLevel.LIFECYCLE
 }
 
 
-task("welcome") {
-    doLast() {
-        println("Welcome to my Gradle task!")
-    }
-}
-
-
-// https://www.baeldung.com/gradle-custom-task
-abstract class PrintToolVersionTask : DefaultTask() {
-
-    @get: Input
-    abstract val tool: Property<String>
-
-    @TaskAction
-    fun printToolVersion() {
-        when (val t = tool.get()) {
-            "java" -> println(System.getProperty("java.version"))
-            "kotlin" -> println(KotlinVersion.CURRENT)
-            else -> throw IllegalArgumentException("Unknown tool: $t")
-        }
-    }
-}
-
-tasks.register<PrintToolVersionTask>("printJavaVersion") {
-    tool.set("java")
-}
-
-tasks.register<PrintToolVersionTask>("printKotlinVersion") {
-    tool.set("kotlin")
-}
-
-tasks.register<PrintToolVersionTask>("printInvalidToolVersion") {
-    tool.set("INVALID")
-}
+apply("task-welcome.gradle.kts")
+apply("task-print-version.gradle.kts")
